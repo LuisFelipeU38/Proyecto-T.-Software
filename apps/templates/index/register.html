@@ -1,3 +1,4 @@
+<!-- register.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,8 +13,7 @@
         {{ form.as_p }}
         <button type="submit">Registrarse</button>
     </form>
-
-    <!-- Enlace para ir a la página de inicio de sesión -->
-    <p>¿Ya tienes una cuenta? <a href="{% url 'login' %}">Iniciar sesión</a></p>
+    <!-- Agregar botón para ir a la página de inicio de sesión -->
+    <a href="{% url 'login' %}"><button>Iniciar sesión</button></a>
 </body>
 </html>

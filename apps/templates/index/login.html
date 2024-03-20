@@ -12,10 +12,7 @@
     <!-- Formulario de inicio de sesión -->
     <form method="post">
         {% csrf_token %}
-        <label for="username">Usuario:</label>
-        <input type="text" id="username" name="username"><br>
-        <label for="password">Contraseña:</label>
-        <input type="password" id="password" name="password"><br>
+        {{ form.as_p }}
         <button type="submit">Iniciar sesión</button>
     </form>
     
