@@ -1,0 +1,41 @@
+{% block title %} {{title}} {% endblock %} 
+
+{% block header_title %} {{subtitle}} {% endblock %} 
+
+
+{% block content %} 
+
+<div class="card mb-3"> 
+
+  <div class="row g-0"> 
+
+
+    <div class="col-md-8"> 
+
+      <div class="card-body"> 
+
+        <h5 class="card-title"> 
+                {{ videogame.title }}
+        </h5> 
+        <p class="card-text">Id del videojuego: {{videogame.id}}</p>
+        <p class="card-text">Desarrollador: {{videogame.dev}}</p>
+        <p class="card-text">Stock actual del videojuego: {{videogame.stock}}</p>
+        <p class="card-text">Categoria: {{videogame.category}}</p>
+        <p class="card-text">Precio videojuego: {{videogame.price}}</p>
+        <p class="card-text">Rating actual: {{videogame.rating}}</p>
+        
+ 
+        <form action="{% url 'add_order' videogame.id customuser.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit">Añadir a la orden</button>
+        </form>
+
+      </div> 
+
+    </div> 
+
+  </div> 
+
+</div> 
+
+{% endblock %} 
