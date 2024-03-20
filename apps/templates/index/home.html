@@ -1,4 +1,6 @@
-<!-- home.html -->
+{% extends 'index/base.html' %} 
+
+{% block content %} 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +9,7 @@
     <title>Bienvenido a Nuestro Sitio Web</title>
 </head>
 <body>
+    
     <h1>Bienvenido a Nuestro Sitio Web</h1>
     <p>¿Listo para empezar? ¡Regístrate ahora!</p>
     <a href="{% url 'register' %}"><button>Registrarse</button></a>
@@ -15,3 +18,4 @@
 </html>
 
 
+{% endblock %} 
