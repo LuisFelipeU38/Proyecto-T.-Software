@@ -1,31 +1,33 @@
 {% extends 'index/base.html' %} 
 
-{% block title %} {{title}} {% endblock %} 
+{% block title %} {{ title }} {% endblock %} 
 
-{% block header_title %} {{subtitle}} {% endblock %} 
+{% block header_title %} {{ subtitle }} {% endblock %} 
 
 {% block content %} 
+<div class="row">
+    <form method="GET" action="">
+        <label for="category">Categoría:</label>
+        <select name="category" id="category">
+            <option value="">Todas</option>
+            <option value="OW">OW</option>
+            <option value="race">race</option>
+            <option value="BR">BR</option>
+            <option value="5v5">5v5</option>
+        </select>
+        <button type="submit">Buscar</button>
+    </form>
+</div>
 <div class="row"> 
-
     {% for videogame in videogames %} 
-  
     <div class="col-md-4 col-lg-3 mb-2"> 
-  
       <div class="card"> 
-  
         <div class="card-body text-center"> 
-  
           <a href="{% url 'show' customuser_id=customuser.id videogame_id=videogame.id %}" 
-  
-            class="btn bg-primary text-white">{{videogame.title}}</a> 
-  
+            class="btn bg-primary text-white">{{ videogame.title }}</a> 
         </div> 
-  
       </div> 
-  
     </div> 
-  
     {% endfor %} 
-  
-  </div> 
-  {% endblock %} 
+</div> 
+{% endblock %} 

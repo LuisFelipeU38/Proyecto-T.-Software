@@ -36,8 +36,15 @@ class VideoGameIndexView(View):
     def get(self, request, id): 
         viewData = {} 
         viewData["title"] = "Video games - El Botardo.com" 
-        viewData["subtitle"] = "List of games in stock" 
-        viewData["videogames"] = VideoGame.objects.all()  
+        viewData["subtitle"] = "List of games in stock"
+        category = request.GET.get('category')  # Obtener la categoría de la solicitud GET
+        if category:
+            videogames = VideoGame.objects.filter(category=category)
+            print(f"Filtrando por categoría: {category}, videojuegos encontrados: {videogames.count()}")
+        else:
+            videogames = VideoGame.objects.all()
+            print(f"Mostrando todos los videojuegos, cantidad: {videogames.count()}")
+        viewData["videogames"] = videogames
         viewData["customuser"] = CustomUser.objects.get(id=id)  # Agrega el objeto CustomUser al contexto
 
         return render(request, self.template_name, viewData)
