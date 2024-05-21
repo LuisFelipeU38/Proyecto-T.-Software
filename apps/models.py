@@ -16,6 +16,7 @@ class VideoGame(models.Model):
     stock = models.IntegerField()
     price = models.IntegerField()
     rating = models.IntegerField()
+    cover_image = models.ImageField(upload_to='videogame_covers/', blank=True, null=True)
 
     def __str__(self):
         return f"{self.title}"

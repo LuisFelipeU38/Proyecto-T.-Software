@@ -1,10 +1,12 @@
-{% extends 'index/base.html' %} 
+{% extends 'index/base.html' %}
 
-{% block title %} {{ title }} {% endblock %} 
+{% load static %}  <!-- Cargar el tag static -->
 
-{% block header_title %} {{ subtitle }} {% endblock %} 
+{% block title %} {{ title }} {% endblock %}
 
-{% block content %} 
+{% block header_title %} {{ subtitle }} {% endblock %}
+
+{% block content %}
 <div class="row">
     <form method="GET" action="">
         <label for="category">Categoría:</label>
@@ -18,16 +20,20 @@
         <button type="submit">Buscar</button>
     </form>
 </div>
-<div class="row"> 
-    {% for videogame in videogames %} 
-    <div class="col-md-4 col-lg-3 mb-2"> 
-      <div class="card"> 
-        <div class="card-body text-center"> 
-          <a href="{% url 'show' customuser_id=customuser.id videogame_id=videogame.id %}" 
-            class="btn bg-primary text-white">{{ videogame.title }}</a> 
-        </div> 
-      </div> 
-    </div> 
-    {% endfor %} 
-</div> 
-{% endblock %} 
+<div class="row">
+    {% for videogame in videogames %}
+    <div class="col-md-4 col-lg-3 mb-2">
+        <div class="card">
+            <div class="card-body text-center">
+                <a href="{% url 'show' customuser_id=customuser.id videogame_id=videogame.id %}" class="btn bg-primary text-white">{{ videogame.title }}</a>
+                {% if videogame.cover_image %}
+                <img src="{{ videogame.cover_image.url }}" alt="{{ videogame.title }}" class="img-fluid mt-2">
+                {% else %}
+                <img src="{% static 'img/default_cover.jpg' %}" alt="Default cover" class="img-fluid mt-2">
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
