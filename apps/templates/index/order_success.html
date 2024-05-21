@@ -1,8 +1,8 @@
 {% extends 'index/base.html' %}
 
 {% block content %}
-<h1>Compra Exitosa</h1>
-<p>Tu pedido ha sido realizado con éxito. El número de tu pedido es: {{ order.id }}</p>
-<h3>Total pagado: ${{ total_price }}</h3>
-<a href="{% url 'index' 1 %}" class="btn btn-primary">Seguir comprando</a>
+<h1>Successful Purchase</h1>
+<p>Your order has been successfully placed. Your order number is: {{ order.id }}</p>
+<h3>Total paid: ${{ total_price }}</h3>
+<a href="{% url 'index' 1 %}" class="btn btn-primary">Continue Shopping</a>
 {% endblock %}

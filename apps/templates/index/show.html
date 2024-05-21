@@ -19,18 +19,18 @@
         <h5 class="card-title"> 
                 {{ videogame.title }}
         </h5> 
-        <p class="card-text">Id del videojuego: {{videogame.id}}</p>
-        <p class="card-text">Desarrollador: {{videogame.dev}}</p>
-        <p class="card-text">Stock actual del videojuego: {{videogame.stock}}</p>
-        <p class="card-text">Categoria: {{videogame.category}}</p>
-        <p class="card-text">Precio videojuego: {{videogame.price}}</p>
-        <p class="card-text">rating actual: {{videogame.rating}}</p>
+        <p class="card-text">Videogame Id: {{videogame.id}}</p>
+        <p class="card-text">Developer: {{videogame.dev}}</p>
+        <p class="card-text">Stock: {{videogame.stock}}</p>
+        <p class="card-text">Category: {{videogame.category}}</p>
+        <p class="card-text">Price: {{videogame.price}}</p>
+        <p class="card-text">Rating: {{videogame.rating}}</p>
 
-        <a href="{% url 'index' 1 %}" class="btn btn-primary">Seguir Explorando</a>
+        <a href="{% url 'index' 1 %}" class="btn btn-primary">Continue exploring</a>
 
         <form action="{% url 'add_to_cart' videogame.id %}" method="post">
           {% csrf_token %}
-          <button type="submit" class="btn btn-success">Agregar al carrito</button>
+          <button type="submit" class="btn btn-success">Add to cart</button>
       </form>
 
       </div> 

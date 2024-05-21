@@ -24,7 +24,7 @@
     crossorigin="anonymous"
   />
   
-    <title>Bienvenido a Nuestro Sitio Web</title>
+    <title>Welcome</title>
 </head>
 <body>
     <header class="container-fluid py-3 bg-light border-bottom">
@@ -52,7 +52,7 @@
               <a href="{% url 'profile' %}" class="nav-link">Profile</a>
             </li>
             <li class="nav-item">
-              <a href="{% url 'index' 1 %}" class="nav-link">Explorar</a>
+              <a href="{% url 'index' 1 %}" class="nav-link">Explore</a>
             </li>
             <li class="nav-item">
               <a href="{% url 'cart' %}" class="nav-link"><img src="{% static 'cart.svg' %}"></a>
@@ -61,17 +61,17 @@
         </div>
     </header>
     <section>    
-        <h1>Bienvenido a ElBotardo</h1>
-        <p>¿Listo para empezar? ¡Regístrate ahora!</p>
-        <a href="{% url 'register' %}"><button class="btn btn-primary">Registrarse</button></a>
-        <a href="{% url 'login' %}"><button class="btn btn-success">Iniciar sesión</button></a>  <!-- Agregar botón para ir a la página de inicio de sesión -->
+        <h1>Welcome to ElBotardo</h1>
+        <p>Ready to start? Register now!</p>
+        <a href="{% url 'register' %}"><button class="btn btn-primary">Register</button></a>
+        <a href="{% url 'login' %}"><button class="btn btn-success">Log in</button></a>  <!-- Agregar botón para ir a la página de inicio de sesión -->
         </section>
     <div class="parallax-image parallax-image-01"></div>
     <section>    
         <h1>Try a new game!</h1>
         <!-- Botón de recomendación aleatoria -->
         <form method="get" action="{% url 'home' %}">
-            <button class="btn btn-success" type="submit" name="random_game" value="true">Recomendación Aleatoria</button>
+            <button class="btn btn-success" type="submit" name="random_game" value="true">Random recommendation</button>
         </form>
 
         {% if game %}

@@ -2,15 +2,15 @@
 
 {% block content %}
 
-<h1>Carrito de Compras</h1>
+<h1>Shopping cart</h1>
 {% if cart %}
 <table class="table">
   <thead>
     <tr>
-      <th>Producto</th>
-      <th>Precio</th>
-      <th>Cantidad</th>
-      <th>Acciones</th>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -20,16 +20,16 @@
       <td>{{ item.price }}</td>
       <td>{{ item.quantity }}</td>
       <td>
-        <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-danger">Eliminar</a>
+        <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-danger">Remove</a>
       </td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
-<a href="{% url 'index' 1 %}" class="btn btn-primary">Seguir Comprando</a>
-<a href="{% url 'checkout' %}" class="btn btn-success">Proceder a la Compra</a> <!-- Nuevo botón para proceder a la compra -->
+<a href="{% url 'index' 1 %}" class="btn btn-primary">Continue shopping</a>
+<a href="{% url 'checkout' %}" class="btn btn-success">Purchase</a> <!-- Nuevo botón para proceder a la compra -->
 {% else %}
-<p>Tu carrito está vacío.</p>
-<a href="{% url 'index' 1 %}" class="btn btn-primary">Seguir Comprando</a>
+<p>Your cart is empty.</p>
+<a href="{% url 'index' 1 %}" class="btn btn-primary">Contiune shopping</a>
 {% endif %}
 {% endblock %}
