@@ -1,0 +1,35 @@
+{% extends 'index/base.html' %} 
+
+{% block content %}
+
+<h1>Carrito de Compras</h1>
+{% if cart %}
+<table class="table">
+  <thead>
+    <tr>
+      <th>Producto</th>
+      <th>Precio</th>
+      <th>Cantidad</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in cart %}
+    <tr>
+      <td>{{ item.title }}</td>
+      <td>{{ item.price }}</td>
+      <td>{{ item.quantity }}</td>
+      <td>
+        <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-danger"
+          >Eliminar</a
+        >
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<a href="{% url 'index' 1 %}" class="btn btn-primary">Seguir Comprando</a>
+{% else %}
+<p>Tu carrito está vacío.</p>
+<a href="{% url 'index' 1 %}" class="btn btn-primary">Seguir Comprando</a>
+{% endif %} {% endblock %}

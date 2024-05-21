@@ -12,3 +12,16 @@ class CustomUserCreationForm(UserCreationForm):
 class LoginForm(AuthenticationForm):
     username = forms.CharField(label="Usuario")
     password = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
+
+class VideoGameSearchForm(forms.Form):
+    CATEGORY_CHOICES = [
+        ('action', 'Action'),
+        ('adventure', 'Adventure'),
+        # Añade más categorías según sea necesario
+    ]
+
+    category = forms.ChoiceField(choices=CATEGORY_CHOICES, required=False)
+    min_price = forms.DecimalField(max_digits=10, decimal_places=2, required=False)
+    max_price = forms.DecimalField(max_digits=10, decimal_places=2, required=False)
+    developer = forms.CharField(max_length=255, required=False)
+    min_rating = forms.IntegerField(min_value=1, max_value=5, required=False)

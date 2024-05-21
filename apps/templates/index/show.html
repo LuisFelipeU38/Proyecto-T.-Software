@@ -32,6 +32,11 @@
             <button type="submit">Añadir a la orden</button>
         </form>
 
+        <form action="{% url 'add_to_cart' videogame.id %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-success">Agregar al carrito</button>
+      </form>
+
       </div> 
 
     </div> 

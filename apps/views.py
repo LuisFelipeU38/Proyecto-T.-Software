@@ -2,13 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import CustomUserCreationForm
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
 from .models import VideoGame, CustomUser, Order
 from django.views import View
 from django.views.generic import TemplateView, ListView 
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.forms import AuthenticationForm
-from .forms import CustomUserCreationForm
 from django.http import HttpResponse, HttpResponseRedirect 
 from django.urls import reverse
 
@@ -107,3 +103,47 @@ def add_order(request, videogame_id, customuser_id):
     else:
         # Si el método no es POST, redirigir a alguna página de error o a donde desees
         return HttpResponseRedirect(reverse('profile'))
+    
+# Función para obtener el carrito desde la sesión
+def get_cart(request):
+    cart = request.session.get('cart', {})
+    return cart
+
+# Función para agregar un producto al carrito
+def add_to_cart(request, videogame_id):
+    cart = get_cart(request)
+    videogame = get_object_or_404(VideoGame, id=videogame_id)
+    if str(videogame_id) in cart:
+        cart[str(videogame_id)]['quantity'] += 1
+    else:
+        cart[str(videogame_id)] = {
+            'title': videogame.title,
+            'price': videogame.price,
+            'quantity': 1,
+        }
+    request.session['cart'] = cart
+    return redirect('cart')
+
+# Función para eliminar un producto del carrito
+def remove_from_cart(request, videogame_id):
+    cart = request.session.get('cart', {})
+
+    if str(videogame_id) in cart:
+        del cart[str(videogame_id)]
+        request.session['cart'] = cart
+
+    return redirect('cart')
+
+# Función para ver el carrito
+def cart(request):
+    cart = request.session.get('cart', {})
+    cart_items = []
+
+    for item_id, item_data in cart.items():
+        cart_items.append({
+            'id': item_id,
+            'title': item_data['title'],
+            'price': item_data['price'],
+            'quantity': item_data['quantity']
+        })
+    return render(request, 'index/cart.html', {'cart': cart_items})
