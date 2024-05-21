@@ -7,9 +7,17 @@ from django.views import View
 from django.views.generic import TemplateView, ListView 
 from django.http import HttpResponse, HttpResponseRedirect 
 from django.urls import reverse
+import random
 
 def home(request):
-    return render(request, 'index/home.html')
+    game = None
+    if 'random_game' in request.GET:
+        games = VideoGame.objects.all()
+        if games:
+            game = random.choice(games)
+    
+    return render(request, 'index/home.html', {'game': game})
+
 
 def register(request):
     if request.method == 'POST':
@@ -174,4 +182,3 @@ def order_success(request):
     for item_data in cart.values():
         item_data['total'] = item_data['price'] * item_data['quantity']
     return render(request, 'index/order_success.html', {'cart': cart, 'total_price': total_price})
-

@@ -17,7 +17,8 @@ urlpatterns = [
     path('cart/add/<int:videogame_id>/', views.add_to_cart, name='add_to_cart'),  # Ruta para agregar al carrito
     path('cart/remove/<int:videogame_id>/', views.remove_from_cart, name='remove_from_cart'),  # Ruta para eliminar del carrito
     path('checkout/', views.checkout, name='checkout'),  # Ruta para la vista de checkout
-    path('order_success/', views.order_success, name='order_success'),  # Agregar esta línea
+    path('order_success/', views.order_success, name='order_success'),
+    # path('random_game/', views.random_game_recommendation, name='random_game_recommendation'),  # Ruta para la recomendación aleatoria
 ]
 
 if settings.DEBUG:

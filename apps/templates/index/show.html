@@ -25,12 +25,8 @@
         <p class="card-text">Categoria: {{videogame.category}}</p>
         <p class="card-text">Precio videojuego: {{videogame.price}}</p>
         <p class="card-text">rating actual: {{videogame.rating}}</p>
-        
- 
-        <form action="{% url 'add_order' videogame.id customuser.id %}" method="POST">
-            {% csrf_token %}
-            <button type="submit">Añadir a la orden</button>
-        </form>
+
+        <a href="{% url 'index' 1 %}" class="btn btn-primary">Seguir Explorando</a>
 
         <form action="{% url 'add_to_cart' videogame.id %}" method="post">
           {% csrf_token %}
