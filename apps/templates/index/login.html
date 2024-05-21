@@ -1,28 +1,54 @@
 {% extends 'index/base.html' %} 
+{% load static %}
 
 {% block content %} 
-
-<!-- login.html -->
-<!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesión</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
 </head>
-<body>
-    <h1>Iniciar sesión</h1>
-    
-    <!-- Formulario de inicio de sesión -->
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Iniciar sesión</button>
-    </form>
-    
-    <!-- Enlace para registrarse -->
-    <a href="{% url 'register' %}">Registrarse</a>
-</body>
-</html>
-
+    <div class="form-wrapper">
+        <main class="form-side">
+            <form class="my-form" method="post">
+                {% csrf_token %}
+                <div class="form-welcome-row">
+                    <h1>Welcome! &#128079;</h1>
+                    <h2>Login with your account!</h2>
+                </div>
+                <div class="socials-row">
+                    <a href="#" title="Use Google">
+                        <img src="{% static 'google.png' %}" alt="Google">
+                        Continue with Google
+                    </a>
+                </div>
+                <div class="divider">
+                    <div class="divider-line"></div>
+                    or
+                    <div class="divider-line"></div>
+                </div>
+                <div class="text-field">
+                    <label for="{{ form.username.id_for_label }}">Username</label>
+                    <input type="text" id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}" autocomplete="off" placeholder="Your username" required>
+                </div>
+                <div class="text-field">
+                    <label for="{{ form.password.id_for_label }}">Password</label>
+                    <input id="{{ form.password.id_for_label }}" type="password" name="{{ form.password.html_name }}" placeholder="Your password" required>
+                </div>
+                <button class="my-form__button" type="submit">
+                    Iniciar Sesión
+                </button>
+                <div class="my-form__actions">
+                    <div class="my-form__row">
+                        <span>Don't have an account?</span>
+                        <a href="{% url 'register' %}" title="Register">
+                            Sign Up Now
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </main>
+        <aside class="info-side">
+            <div class="blockquote-wrapper">
+                <img src="{% static 'logo.jpg' %}" alt="Returns" class="returns">
+            </div>
+        </aside>
+    </div>
 {% endblock %} 
