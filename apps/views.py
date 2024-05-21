@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import CustomUserCreationForm
 from django.contrib.auth.decorators import login_required
-from .models import VideoGame, CustomUser, Order
+from .models import VideoGame, CustomUser, Order, OrderItem
 from django.views import View
 from django.views.generic import TemplateView, ListView 
 from django.http import HttpResponse, HttpResponseRedirect 
@@ -147,3 +147,31 @@ def cart(request):
             'quantity': item_data['quantity']
         })
     return render(request, 'index/cart.html', {'cart': cart_items})
+
+@login_required
+def checkout(request):
+    cart = request.session.get('cart', {})
+    if not cart:
+        return redirect('cart')
+
+    total_price = sum(item['price'] * item['quantity'] for item in cart.values())
+    total_price = round(total_price, 2)  # Redondea el precio total a 2 decimales
+
+    for item_data in cart.values():
+        item_data['total'] = item_data['price'] * item_data['quantity']
+
+    return render(request, 'index/checkout.html', {'cart': cart, 'total_price': total_price})
+
+@login_required
+def order_success(request):
+    cart = request.session.get('cart', {})
+    if not cart:
+        return redirect('cart')
+
+    total_price = sum(item['price'] * item['quantity'] for item in cart.values())
+    total_price = round(total_price, 2)  # Redondea el precio total a 2 decimales
+
+    for item_data in cart.values():
+        item_data['total'] = item_data['price'] * item_data['quantity']
+    return render(request, 'index/order_success.html', {'cart': cart, 'total_price': total_price})
+

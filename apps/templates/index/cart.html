@@ -1,4 +1,4 @@
-{% extends 'index/base.html' %} 
+{% extends 'index/base.html' %}
 
 {% block content %}
 
@@ -20,16 +20,16 @@
       <td>{{ item.price }}</td>
       <td>{{ item.quantity }}</td>
       <td>
-        <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-danger"
-          >Eliminar</a
-        >
+        <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-danger">Eliminar</a>
       </td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
 <a href="{% url 'index' 1 %}" class="btn btn-primary">Seguir Comprando</a>
+<a href="{% url 'checkout' %}" class="btn btn-success">Proceder a la Compra</a> <!-- Nuevo botón para proceder a la compra -->
 {% else %}
 <p>Tu carrito está vacío.</p>
 <a href="{% url 'index' 1 %}" class="btn btn-primary">Seguir Comprando</a>
-{% endif %} {% endblock %}
+{% endif %}
+{% endblock %}

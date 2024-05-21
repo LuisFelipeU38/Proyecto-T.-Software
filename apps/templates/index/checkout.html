@@ -1,0 +1,30 @@
+{% extends 'index/base.html' %}
+
+{% block content %}
+<h1>Revisión del Pedido</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Producto</th>
+      <th>Precio</th>
+      <th>Cantidad</th>
+      <th>Total por Ítem</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item_id, item_data in cart.items %}
+    <tr>
+      <td>{{ item_data.title }}</td>
+      <td>{{ item_data.price }}</td>
+      <td>{{ item_data.quantity }}</td>
+      <td>${{ item_data.total }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<h3>Total: ${{ total_price }}</h3>
+
+<a href="{% url 'cart' %}" class="btn btn-primary">Volver al Carrito</a>
+<a href="{% url 'order_success' %}" class="btn btn-success">Confirmar Compra</a>
+
+{% endblock %}
