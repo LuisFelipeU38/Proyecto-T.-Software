@@ -4,8 +4,6 @@
 > Django 5.0.2
 > 
 > factory-boy 3.3.0
->
-> django-allauth
 
 ### 2. Realizar migraciones en la base de datos:
    
