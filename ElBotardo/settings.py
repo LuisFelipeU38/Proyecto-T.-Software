@@ -22,7 +22,7 @@ SECRET_KEY = 'django-insecure-i0cst@(xdy8pp&x^fs95&wuoc8irrsw_4v*pfmr$_%!stza^si
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['elbotardo.talentosenv.tech', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'apps'
 ]
 

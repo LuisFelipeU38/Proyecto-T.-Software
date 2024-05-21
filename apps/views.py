@@ -8,6 +8,8 @@ from django.views.generic import TemplateView, ListView
 from django.http import HttpResponse, HttpResponseRedirect 
 from django.urls import reverse
 import random
+from rest_framework import generics
+from .serializers import VideoGameSerializer
 
 def home(request):
     game = None
@@ -86,6 +88,10 @@ class VideoGameListView(ListView):
         context['title'] = 'videogames - Online Store'
         context['subtitle'] = 'List of videogames'
         return context
+    
+class VideoGameListAPIView(generics.ListAPIView):
+    queryset = VideoGame.objects.all()
+    serializer_class = VideoGameSerializer
     
 def add_order(request, videogame_id, customuser_id):
     if request.method == 'POST':
