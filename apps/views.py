@@ -116,6 +116,10 @@ class VideoGameListView(ListView):
 class VideoGameListAPIView(generics.ListAPIView):
     queryset = VideoGame.objects.all()
     serializer_class = VideoGameSerializer
+
+class VideoGameDetailAPIView(generics.RetrieveAPIView):
+    queryset = VideoGame.objects.all()
+    serializer_class = VideoGameSerializer
     
 def add_order(request, videogame_id, customuser_id):
     if request.method == 'POST':
