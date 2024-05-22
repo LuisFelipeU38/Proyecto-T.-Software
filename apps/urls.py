@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
-from .views import VideoGameIndexView, VideoGameShowView, VideoGameListAPIView
+from .views import VideoGameIndexView, VideoGameShowView, VideoGameListAPIView, VideoGameDetailAPIView
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -19,6 +19,7 @@ urlpatterns = [
     path('checkout/', views.checkout, name='checkout'),  # Ruta para la vista de checkout
     path('order_success/', views.order_success, name='order_success'),
     path('api/videogames/', VideoGameListAPIView.as_view(), name='videogame-list-api'),
+    path('api/videogames/<int:pk>/', VideoGameDetailAPIView.as_view(), name='videogame-detail'),
 ]
 
 if settings.DEBUG:
