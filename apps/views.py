@@ -7,18 +7,42 @@ from django.views import View
 from django.views.generic import TemplateView, ListView 
 from django.http import HttpResponse, HttpResponseRedirect 
 from django.urls import reverse
-import random
+import random, requests
 from rest_framework import generics
 from .serializers import VideoGameSerializer
 
+def get_free_games():
+    url = "https://free-epic-games.p.rapidapi.com/free"
+    headers = {
+        "X-RapidAPI-Key": "48c3487113mshee31d46fb119b79p16b8d6jsn5eb76435bd65",
+        "X-RapidAPI-Host": "free-epic-games.p.rapidapi.com"
+    }
+    try:
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()  # Raise HTTPError for bad responses
+        data = response.json()
+        return data['freeGames']['current']  # Devuelve la lista de juegos actuales gratuitos
+    except requests.exceptions.HTTPError as http_err:
+        print(f"HTTP error occurred: {http_err}")  # Imprime errores HTTP
+    except requests.exceptions.RequestException as req_err:
+        print(f"Request error occurred: {req_err}")  # Imprime otros errores de solicitud
+    return []
+
+
 def home(request):
+    free_games = get_free_games()
     game = None
     if 'random_game' in request.GET:
         games = VideoGame.objects.all()
         if games:
             game = random.choice(games)
     
-    return render(request, 'index/home.html', {'game': game})
+    context = {
+        'game': game,
+        'free_games': free_games,
+    }
+    
+    return render(request, 'index/home.html', context)
 
 
 def register(request):

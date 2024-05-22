@@ -18,7 +18,6 @@ urlpatterns = [
     path('cart/remove/<int:videogame_id>/', views.remove_from_cart, name='remove_from_cart'),  # Ruta para eliminar del carrito
     path('checkout/', views.checkout, name='checkout'),  # Ruta para la vista de checkout
     path('order_success/', views.order_success, name='order_success'),
-    path('api/videogames/', VideoGameListAPIView.as_view(), name='videogame-list-api'),
 ]
 
 if settings.DEBUG:

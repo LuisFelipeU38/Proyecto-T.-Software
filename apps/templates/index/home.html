@@ -88,6 +88,32 @@
         {% endif %}
     </section>
     <div class="parallax-image parallax-image-02"></div>
+    <section>    
+      <h1>Check this free games!</h1>
+      <div class="container">
+        {% if free_games %}
+            <div class="row">
+                {% for game in free_games %}
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            {% if game.keyImages %}
+                                <img src="{{ game.keyImages.0.url }}" class="card-img-top" alt="{{ game.title }}">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ game.title }}</h5>
+                                <p class="card-text">{{ game.description }}</p>
+                                <a href="https://www.epicgames.com/store/p/{{ game.productSlug }}" target="_blank" class="btn btn-primary">Get it now</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No free games available at the moment.</p>
+        {% endif %}
+    </div>
+    </section>
+    <div class="parallax-image parallax-image-03"></div>
 </body>
 </html>
 
