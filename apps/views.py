@@ -21,6 +21,7 @@ def get_free_games():
         response = requests.get(url, headers=headers)
         response.raise_for_status()  # Raise HTTPError for bad responses
         data = response.json()
+        print("API_DATA: ", data)
         return data['freeGames']['current']  # Devuelve la lista de juegos actuales gratuitos
     except requests.exceptions.HTTPError as http_err:
         print(f"HTTP error occurred: {http_err}")  # Imprime errores HTTP
