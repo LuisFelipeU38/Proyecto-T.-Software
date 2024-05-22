@@ -5,7 +5,14 @@
 {% block title %}User Register{% endblock %}
 
 {% block content %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+</head>
+
 <div class="register-container">
+    <div class="image-container">
+        <img src="{% static 'mccree.jpg' %}" alt="Register Image" class="register-image">
+    </div>
     <div class="form-container">
         <h2>User register</h2>
         <form method="post" class="register-form">
@@ -14,10 +21,11 @@
             <button type="submit" class="register-button">Register</button>
         </form>
         <!-- Agregar botón para ir a la página de inicio de sesión -->
-        <a href="{% url 'login' %}"><button type="button" class="login-button">Login</button></a>
+        <span>Do you already have an account?</span>
+        <a href="{% url 'login' %}" title="Login">
+            Go to Log In
+        </a>
     </div>
-    <div class="image-container">
-        <img src="{% static 'mccree.jpg' %}" alt="Register Image" class="register-image">
-    </div>
+    
 </div>
 {% endblock %}
