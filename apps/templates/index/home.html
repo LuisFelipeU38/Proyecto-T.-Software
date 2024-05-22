@@ -2,7 +2,6 @@
 
 {% block content %} 
 
-<!-- home.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,7 +47,6 @@
               <li class="nav-item">
                 <a href="{% url 'profile' %}" class="nav-link">Profile</a>
               </li>
-              <!-- Otras opciones para usuarios logueados -->
             {% else %}
               <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Login</a></li>
               <li class="nav-item"><a href="{% url 'register' %}" class="nav-link">Register</a></li>
@@ -66,13 +64,12 @@
         {% else %}
           <p>Ready to start? Register now!</p>
           <a href="{% url 'register' %}"><button class="btn btn-primary">Register</button></a>
-          <a href="{% url 'login' %}"><button class="btn btn-success">Log in</button></a>  <!-- Agregar botón para ir a la página de inicio de sesión -->
+          <a href="{% url 'login' %}"><button class="btn btn-success">Log in</button></a>  
         {% endif %}
         </section>
     <div class="parallax-image parallax-image-01"></div>
     <section>    
         <h1>Try a new game!</h1>
-        <!-- Botón de recomendación aleatoria -->
         <form method="get" action="{% url 'home' %}">
             <button class="btn btn-success" type="submit" name="random_game" value="true">Random recommendation</button>
         </form>

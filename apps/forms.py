@@ -17,7 +17,6 @@ class VideoGameSearchForm(forms.Form):
     CATEGORY_CHOICES = [
         ('action', 'Action'),
         ('adventure', 'Adventure'),
-        # Añade más categorías según sea necesario
     ]
 
     category = forms.ChoiceField(choices=CATEGORY_CHOICES, required=False)

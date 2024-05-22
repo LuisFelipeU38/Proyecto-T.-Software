@@ -61,7 +61,6 @@
 
 .image-container {
     width: 35%;
-    /* Ajuste para acomodar la imagen */
     display: flex;
     justify-content: center;
     align-items: center;

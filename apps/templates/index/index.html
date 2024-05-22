@@ -1,6 +1,6 @@
 {% extends 'index/base.html' %}
 
-{% load static %}  <!-- Cargar el tag static -->
+{% load static %}  
 
 {% block title %} {{ title }} {% endblock %}
 
@@ -32,7 +32,6 @@
                 <img src="{% static 'img/default_cover.jpg' %}" alt="Default cover" class="img-fluid mt-2">
                 {% endif %}
                 
-                <!-- Formulario para agregar al carrito -->
                 <form action="{% url 'add_to_cart' videogame.id %}" method="post">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-success">Add to cart</button>
