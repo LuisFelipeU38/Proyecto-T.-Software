@@ -10,11 +10,15 @@ from django.urls import reverse
 import random, requests
 from rest_framework import generics
 from .serializers import VideoGameSerializer
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+
 
 def get_free_games():
     url = "https://free-epic-games.p.rapidapi.com/free"
     headers = {
-        "X-RapidAPI-Key": "48c3487113mshee31d46fb119b79p16b8d6jsn5eb76435bd65",
+        # "X-RapidAPI-Key": "48c3487113mshee31d46fb119b79p16b8d6jsn5eb76435bd65",
         "X-RapidAPI-Host": "free-epic-games.p.rapidapi.com"
     }
     try:
@@ -216,4 +220,38 @@ def order_success(request):
 
     for item_data in cart.values():
         item_data['total'] = item_data['price'] * item_data['quantity']
-    return render(request, 'index/order_success.html', {'cart': cart, 'total_price': total_price})
+    
+    # Generar el PDF de la factura
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="invoice.pdf"'
+    pdf = SimpleDocTemplate(response, pagesize=letter)
+    elements = []
+
+    invoice_data = [
+        ['Description', 'Quantity', 'Unit Price', 'Total Price'],
+    ]
+    for item_id, item_data in cart.items():
+        invoice_data.append([
+            item_data['title'],
+            str(item_data['quantity']),
+            '$' + str(item_data['price']),
+            '$' + str(item_data['total'])
+        ])
+
+    invoice_data.append(['Total', '', '', '$' + str(total_price)])
+
+    invoice_table = Table(invoice_data)
+    invoice_table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
+        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+        ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+    ]))
+
+    elements.append(invoice_table)
+
+    pdf.build(elements)
+
+    return response
